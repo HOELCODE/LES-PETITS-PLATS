@@ -1,0 +1,22 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HOELCODE/LES-PETITS-PLATS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HOELCODE/LES-PETITS-PLATS/issues"
+  },
+  "homepage": "https://github.com/HOELCODE/LES-PETITS-PLATS#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
