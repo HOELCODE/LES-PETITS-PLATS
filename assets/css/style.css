@@ -47,6 +47,7 @@ header img {
     flex-direction: column;
     margin-top: 5%;
     z-index: 2;
+    padding: 0% 5% 0% 5%;
 }
 
 h1 {
@@ -85,3 +86,45 @@ h1 {
     font-size: 25px;
 }
 /* Header */
+
+/* Main */
+
+main {
+    background-color: lightgrey;
+    padding: 3%;
+}
+
+.filter-total-cantainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.filters {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.dropdown {
+    border: 0;
+    background: #fff;
+    border-radius: 5px;
+    padding: 14px 12px;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.choice {
+    font-family: Manrope;
+    font-size: 16px;
+    color: #1B1B1B;
+    font-weight: 500;
+}
+/* Main */
