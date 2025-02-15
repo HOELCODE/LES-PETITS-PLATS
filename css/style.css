@@ -91,7 +91,7 @@ h1 {
 
 main {
     background-color: lightgrey;
-    padding: 3%;
+    padding: 3% 8%;
 }
 
 .filter-total-cantainer {
@@ -106,7 +106,14 @@ main {
     align-items: start;
     flex-direction: row;
     justify-content: space-around;
-    width: 40%;
+    width: 65%;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: start;
 }
 
 .dropdown {
@@ -126,5 +133,54 @@ main {
     font-size: 16px;
     color: #1B1B1B;
     font-weight: 500;
+}
+
+.dropdown-content {
+    width: 85%;
+    background: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dropdown-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 85%;
+    border: 0.3px solid lightgray;
+    padding: 7px;
+}
+
+.dropdown-input input {
+    border: 0;
+}
+
+.dropdown-input i {
+    color: lightgray;
+}
+
+.dropdown-list {
+    width: 100%;
+    padding: 0;
+}
+
+.dropdown-list li {
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    list-style: none;
+    cursor: pointer;
+    padding-left: 12px;
+}
+
+.total-recipes {
+    font-family: Anton;
+    font-size: 21px;
+    font-weight: 400;
 }
 /* Main */
