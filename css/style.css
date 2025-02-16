@@ -3,6 +3,9 @@ body {
     margin: 0;
 }
 
+i {
+    cursor: pointer;
+}
 /* Header */
 
 .header-container {
@@ -62,9 +65,16 @@ h1 {
     width: 80%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 40px;
     padding: 10px 10px 10px 30px;
     border-radius: 5px;
+}
+
+.input-button-container .fa-xmark {
+    color: grey;
+    font-size: 25px;
+    margin-right: 10px;
 }
 
 .input-search {
@@ -100,20 +110,22 @@ main {
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
+    margin-bottom: 30px;
 }
 
 .filters {
     display: flex;
     align-items: start;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 65%;
+    flex-wrap: wrap;
 }
 
 .filter {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 25%;
     align-items: start;
 }
 
@@ -122,7 +134,7 @@ main {
     background: #fff;
     border-radius: 5px;
     padding: 14px 12px;
-    width: 85%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -137,14 +149,13 @@ main {
 }
 
 .dropdown-content {
-    width: 85%;
+    width: 100%;
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    padding: 14px 12px;
 }
 
 .dropdown-input {
@@ -152,17 +163,22 @@ main {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 85%;
     border: 0.3px solid lightgray;
     padding: 7px;
 }
 
 .dropdown-input input {
     border: 0;
+    width: 100%;
 }
 
 .dropdown-input i {
     color: lightgray;
+}
+
+.dropdown-input i:nth-of-type(1) {
+    margin-right: 10px;
+    font-size: 15px;
 }
 
 .dropdown-list {
@@ -176,7 +192,6 @@ main {
     font-size: 14px;
     list-style: none;
     cursor: pointer;
-    padding-left: 12px;
 }
 
 .total-recipes {
@@ -194,7 +209,54 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Before and After class */
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .header-container {
+        height: 450px;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .filter-total-cantainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filters {
+        width: 100%;
+    }
+
+    .total-recipes {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .filters {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filter {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+    
+}
+
+/* Responsive */
