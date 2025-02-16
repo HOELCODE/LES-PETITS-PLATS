@@ -13,9 +13,9 @@ i {
     background-image: url('../assets/icon/header-row.png');
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    height: 670px;
     background-size: cover;
     background-position: 10% 64%;
+    height: 650px;
 }
 
 .header-container::before {
@@ -102,8 +102,9 @@ h1 {
 main {
     background-color: lightgrey;
     padding: 3% 8%;
-    height: 600px;
 }
+
+/* Filter */
 
 .filter-total-cantainer {
     display: flex;
@@ -132,7 +133,7 @@ main {
 .dropdown {
     border: 0;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 14px 12px;
     width: 100%;
     display: flex;
@@ -151,8 +152,8 @@ main {
 .dropdown-content {
     width: 100%;
     background: #fff;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     display: flex;
     flex-direction: column;
     padding: 14px 12px;
@@ -199,6 +200,34 @@ main {
     font-size: 21px;
     font-weight: 400;
 }
+
+/* Filter */
+
+/* Recipes */
+
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.recipe {
+    background: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.recipe img {
+    width: 100%;
+    height: 253px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    object-fit: cover;
+}
+
+/* Recipe */
+
 /* Main */
 
 /* Before and After class */
