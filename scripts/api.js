@@ -1,3 +1,4 @@
+// Fonction qui récupère les données
 const getData = async () => {
     try {
         const response = await fetch("../data/recipes.json");

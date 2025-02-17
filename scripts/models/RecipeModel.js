@@ -1,3 +1,4 @@
+// Fonction pour gérer les données
 import { getData } from "../api.js";
 
 class RecipeModel {

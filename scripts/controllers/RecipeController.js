@@ -1,6 +1,7 @@
 import RecipeModel from "../models/RecipeModel.js";
 import RecipeView from "../views/RecipeView.js";
 
+// Contrôleur pour gérer les recettes
 class RecipeController {
     constructor() {
         this.model = new RecipeModel();
