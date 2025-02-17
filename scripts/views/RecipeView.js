@@ -5,7 +5,6 @@ class RecipeView {
     }
 
     displayRecipes(recipes) {
-        this.recipeContainer.innerHTML = ""; // Vide l'affichage actuel
     
         recipes.forEach(recipe => {
             const recipeElement = document.createElement("div");

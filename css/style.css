@@ -185,6 +185,8 @@ main {
 .dropdown-list {
     width: 100%;
     padding: 0;
+    overflow: scroll;
+    max-height: 100px;
 }
 
 .dropdown-list li {
@@ -193,6 +195,7 @@ main {
     font-size: 14px;
     list-style: none;
     cursor: pointer;
+    margin-bottom: 2px;
 }
 
 .total-recipes {
@@ -285,7 +288,7 @@ h2 h3 {
     gap: 10px;
 }
 
-ul {
+.ingredients-container ul {
     list-style: none;
     padding: 0;
 }
