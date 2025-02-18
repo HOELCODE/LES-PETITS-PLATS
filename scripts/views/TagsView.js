@@ -21,6 +21,7 @@ class TagsView {
         // Affiche les ingrédients uniques
         uniqueIngredients.forEach(ingredient => {
             const li = document.createElement("li");
+            li.classList.add("ingredient-li");
             li.textContent = ingredient;
             this.ingredientContainer.appendChild(li);
         });
@@ -38,6 +39,7 @@ class TagsView {
         // Affiche les appareils uniques
         uniqueDevices.forEach(device => {
             const li = document.createElement("li");
+            li.classList.add("device-li");
             li.textContent = device;
             this.devicesContainer.appendChild(li);
         });
@@ -57,11 +59,15 @@ class TagsView {
         //Affiche les ustensiles uniques
         uniqueUtensils.forEach(utensil => {
             const li = document.createElement("li");
+            li.classList.add("utensil-li");
             li.textContent = utensil;
             this.utensilsContainer.appendChild(li);
         });
 
+        document.dispatchEvent(new Event("tagsLoaded"));
+
     }
+
 }
 
 export default TagsView;
