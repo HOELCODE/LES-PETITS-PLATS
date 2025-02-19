@@ -1,60 +1,73 @@
-// Fonction pour ajouter afficher les filtre cliqués
+// Fonction pour gérer l'ajout des tags lorsqu'un li est cliqué
 const tagsLabel = () => {
-    const li = document.querySelectorAll('.filter-total-cantainer li');
+    const container = document.querySelector('.filter-total-cantainer');
     const tagsContainer = document.querySelector('.tags-container');
 
-    li.forEach(element => {
-        element.addEventListener('click', () => {
+    container.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const element = event.target;
             const tag = element.textContent;
             const tagClass = element.className;
             const divTag = document.createElement('div');
             divTag.classList.add('tag-container');
-            divTag.setAttribute('onclick', 'removeTagsLabel()');
 
+            // Création du tag
             divTag.innerHTML = `
                 <span class="tag ${tagClass}">${tag}</span>
                 <i class="fa-solid fa-xmark"></i>
             `;
 
             tagsContainer.appendChild(divTag);
-            element.textContent = '';
-        });
-    });
+            element.remove(); // Supprimer l'élément de la liste
 
+            removeTagsLabel(); // Attacher les événements de suppression
+        }
+    });
 }
 
-// Fonction pour remettre le tag dans la liste
+// Fonction pour réinsérer le tag dans sa liste d'origine en évitant les doublons
 const addTagsToList = (tagContent, tagClass) => {
-    const ul = document.querySelectorAll(".dropdown-list");
+    const ulLists = document.querySelectorAll(".dropdown-list");
+    let targetUl = null;
 
-    if (tagClass = 'ingredient-li') {
-        ul[0].innerHTML += `<li class="
-        ${tagClass}">${tagContent}</li>`;
-    } else if (tagClass = 'device-li') {
-        ul[1].innerHTML += `<li class="
-        ${tagClass}">${tagContent}</li>`;
-    } else {
-        ul[2].innerHTML += `<li class="
-        ${tagClass}">${tagContent}</li>`;
+    // Déterminer la bonne liste où réinsérer l'élément
+    if (tagClass === 'ingredient-li' && ulLists[0]) {
+        targetUl = ulLists[0];
+    } else if (tagClass === 'device-li' && ulLists[1]) {
+        targetUl = ulLists[1];
+    } else if (ulLists[2]) {
+        targetUl = ulLists[2];
     }
-    
+
+    // Vérifier si l'élément existe déjà dans la liste
+    if (targetUl) {
+        const existingLi = Array.from(targetUl.children).find(li => 
+            li.textContent === tagContent && li.className === tagClass
+        );
+
+        if (!existingLi) { // Ajouter seulement si l'élément n'existe pas
+            const newLi = document.createElement('li');
+            newLi.className = tagClass;
+            newLi.textContent = tagContent;
+            targetUl.appendChild(newLi);
+        }
+    }
 };
 
 // Fonction pour supprimer les tags
 const removeTagsLabel = () => {
-    const tagContainerMark = document.querySelectorAll('.tag-container i');
-    const tagDiv = document.querySelectorAll('.tag-container');
-    const tagSpan = document.querySelectorAll('.tag-container span');
-
-
-    tagContainerMark.forEach((tag, index) => {
+    document.querySelectorAll('.tags-container i').forEach(tag => {
         tag.addEventListener('click', () => {
-            tagDiv[index].remove();
-            addTagsToList(tagSpan[index].textContent, tagSpan[index].className);
+            const tagDiv = tag.parentElement;
+            const tagSpan = tagDiv.querySelector('span');
+
+            addTagsToList(tagSpan.textContent, tagSpan.classList[1]);
+            tagDiv.remove();
         });
     });
 }
 
+// Attendre que l'événement soit déclenché
 document.addEventListener("tagsLoaded", () => {
     tagsLabel();
 });
