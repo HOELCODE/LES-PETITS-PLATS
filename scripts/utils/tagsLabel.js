@@ -18,9 +18,9 @@ const tagsLabel = () => {
             `;
 
             tagsContainer.appendChild(divTag);
-            element.remove(); // Supprimer l'élément de la liste
+            element.remove();
 
-            removeTagsLabel(); // Attacher les événements de suppression
+            removeTagsLabel();
         }
     });
 }

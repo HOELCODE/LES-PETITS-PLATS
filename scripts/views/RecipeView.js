@@ -3,7 +3,7 @@ class RecipeView {
     constructor() {
         this.recipeContainer = document.querySelector(".recipes-container");
     }
-
+ 
     displayRecipes(recipes) {
     
         recipes.forEach(recipe => {
@@ -37,6 +37,7 @@ class RecipeView {
     
             this.recipeContainer.appendChild(recipeElement);
         });
+
         // Déclenche l'événement recipeLoaded pour s'assurer de compter le nombre de recettes affichées
         document.dispatchEvent(new Event("recipeLoaded"));
     }

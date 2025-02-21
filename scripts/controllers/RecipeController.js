@@ -12,6 +12,7 @@ class RecipeController {
         await this.model.loadRecipes(); // Charge les données
         const recipes = this.model.getAllRecipes();
         this.view.displayRecipes(recipes); // Affiche les recettes
+        console.log(recipes);
     }
 }
 

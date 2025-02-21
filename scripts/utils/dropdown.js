@@ -32,5 +32,4 @@ const dropdown = () => {
 }
 
 // Déclaration des fonctions
-
 dropdown();

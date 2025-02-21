@@ -1,19 +1,25 @@
-import TagsView from "../views/TagsView.js";
-import TagsModel from "../models/TagsModel.js";
+import TagsView from "../views/TagsView.js"; // Vue
+import TagsModel from "../models/TagsModel.js"; // Modèle
 
-// Contrôleur pour gérer les ingrédients
 class TagsController {
     constructor() {
-        this.model = new TagsModel();
-        this.view = new TagsView();
+        this.model = new TagsModel(); // Crée une instance du modèle
+        this.view = new TagsView(); // Crée une instance de la vue
     }
 
     async init() {
-        await this.model.loadTags(); // Charge les données
-        const Tags = this.model.getAllTags();
-        this.view.displayIngredients(Tags); // Affiche les ingrédients
-        this.view.displayDevices(Tags); // Affiche les appareils
-        this.view.displayUtensils(Tags); // Affiche les ustensiles
+        // Étape 1: Charge les données
+        await this.model.loadTags(); // Charge les données (ingrédients, appareils, ustensiles)
+
+        // Étape 2: Récupère les données
+        const ingredients = this.model.getIngredients(); // Liste des ingrédients
+        const devices = this.model.getDevices(); // Liste des appareils
+        const utensils = this.model.getUtensils(); // Liste des ustensiles
+
+        // Étape 3: Affiche les données dans la vue
+        this.view.displayIngredients(ingredients); // Affiche les ingrédients dans la vue
+        this.view.displayDevices(devices); // Affiche les appareils dans la vue
+        this.view.displayUtensils(utensils); // Affiche les ustensiles dans la vue
     }
 }
 
