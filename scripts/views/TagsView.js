@@ -10,12 +10,17 @@ class TagsView {
     // 3 fonctions pour templater les filtres dans les 3 dropdowns
 
     displayIngredients(ingredients) {
+        this.ingredientContainer.innerHTML = "";
         ingredients.forEach(ingredient => {
             const li = document.createElement("li");
             li.classList.add("ingredient-li");
             li.textContent = ingredient;
             this.ingredientContainer.appendChild(li);
         });
+    }
+
+    updateIngredientsView(newIngredients) {
+        this.displayIngredients(newIngredients);
     }
 
     displayUtensils(utensils) {

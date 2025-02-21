@@ -18,8 +18,17 @@ class TagsController {
 
         // Étape 3: Affiche les données dans la vue
         this.view.displayIngredients(ingredients); // Affiche les ingrédients dans la vue
-        this.view.displayDevices(devices); // Affiche les appareils dans la vue
         this.view.displayUtensils(utensils); // Affiche les ustensiles dans la vue
+        this.view.displayDevices(devices); // Affiche les appareils dans la vue
+
+        document.addEventListener("ingredientsUpdated", (event) => {
+            this.view.updateIngredientsView(event.detail);
+        });
+        
+    }
+
+    removeIngredientAndUpdate(ingredient) {
+        this.model.removeIngredient(ingredient);
     }
 }
 
