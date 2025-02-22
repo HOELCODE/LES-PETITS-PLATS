@@ -49,11 +49,6 @@ class TagsModel {
         return this.ingredients;
     }
 
-    removeIngredient(ingredientName) {
-        this.ingredients = this.ingredients.filter(ing => ing !== ingredientName);
-        document.dispatchEvent(new CustomEvent("ingredientsUpdated", { detail: this.ingredients }));
-    }
-
     getDevices() {
         return this.devices;
     }

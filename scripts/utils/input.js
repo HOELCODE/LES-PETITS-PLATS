@@ -23,8 +23,11 @@ const clearInput = () => {
         element.addEventListener('click', () => {
             input[index].value = '';
             element.classList.add('hidden');
+            document.dispatchEvent(new Event("inputCleared"));
         });
     });
+
+    
 }
 
 // Déclaration des fonctions

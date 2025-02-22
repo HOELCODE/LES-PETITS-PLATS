@@ -13,6 +13,8 @@ class RecipeModel {
     getAllRecipes() {
         return this.recipes;
     }
+
+
 }
 
 export default RecipeModel;

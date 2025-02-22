@@ -5,6 +5,7 @@ class RecipeView {
     }
  
     displayRecipes(recipes) {
+        this.recipeContainer.innerHTML = "";
     
         recipes.forEach(recipe => {
             const recipeElement = document.createElement("div");

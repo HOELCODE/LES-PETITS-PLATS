@@ -19,10 +19,6 @@ class TagsView {
         });
     }
 
-    updateIngredientsView(newIngredients) {
-        this.displayIngredients(newIngredients);
-    }
-
     displayUtensils(utensils) {
         utensils.forEach(utensil => {
             const li = document.createElement("li");
