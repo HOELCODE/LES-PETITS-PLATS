@@ -20,6 +20,7 @@ class TagsView {
     }
 
     displayUtensils(utensils) {
+        this.utensilsContainer.innerHTML = "";
         utensils.forEach(utensil => {
             const li = document.createElement("li");
             li.classList.add("utensil-li");
@@ -29,6 +30,7 @@ class TagsView {
     }
 
     displayDevices(devices) {
+        this.devicesContainer.innerHTML = "";
         devices.forEach(device => {
             const li = document.createElement("li");
             li.classList.add("device-li");

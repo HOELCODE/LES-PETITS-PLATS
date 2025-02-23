@@ -4,6 +4,7 @@ import { getData } from "../api.js";
 class RecipeModel {
     constructor() {
         this.recipes = [];
+        this.filteredRecipes = [];
     }
 
     async loadRecipes() {
@@ -12,6 +13,10 @@ class RecipeModel {
 
     getAllRecipes() {
         return this.recipes;
+    }
+
+    getFilteredRecipes() {
+        return this.filteredRecipes;
     }
 
 

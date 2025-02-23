@@ -8,13 +8,16 @@ class TagsModel {
         this.utensils = [];
     }
 
-    async loadTags() {
-        const data = await getData(); // Récupère les données des recettes
+    async loadAllTags() {
+        const allRecipes = await getData(); // Charge toutes les recettes
+        this.loadTagsFromRecipes(allRecipes);
+    }
 
+    loadTagsFromRecipes(recipes) {
         // Crée un tableau d'ingrédients
         this.ingredients = [
             ...new Set(
-                data
+                recipes
                     .map(recipe => recipe.ingredients.map(ingredient => 
                         typeof ingredient.ingredient === 'string' ? normalize(ingredient.ingredient) : ingredient.ingredient
                     ))
@@ -25,7 +28,7 @@ class TagsModel {
         // Crée un tableau d'appareils
         this.devices = [
             ...new Set(
-                data.map(recipe => 
+                recipes.map(recipe => 
                     typeof recipe.appliance === 'string' ? normalize(recipe.appliance) : recipe.appliance
                 )
             )
@@ -34,7 +37,7 @@ class TagsModel {
         // Crée un tableau d'ustensiles
         this.utensils = [
             ...new Set(
-                data.map(recipe => 
+                recipes.map(recipe => 
                     Array.isArray(recipe.ustensils)
                         ? recipe.ustensils.map(utensil => 
                             typeof utensil === 'string' ? normalize(utensil) : utensil
