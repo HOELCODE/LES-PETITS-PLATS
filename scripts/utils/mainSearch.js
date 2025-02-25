@@ -1,5 +1,5 @@
 export const searchRecipes = (recipes, query) => {
-    if (query < 3) {
+    if (query.length < 3) {
         return recipes;
     }
 
