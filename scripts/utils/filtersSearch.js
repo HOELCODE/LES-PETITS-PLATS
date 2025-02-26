@@ -12,7 +12,7 @@ const onSearch = (inputType) => {
             el.style.display = texte.includes(filter) ? "" : "none";
         });
     });
-};
+};    
 
 // Attendre le chargement des tags avant d'initialiser la recherche
 document.addEventListener("tagsLoaded", () => {

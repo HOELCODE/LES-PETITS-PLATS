@@ -1,5 +1,5 @@
 // Tableau pour stocker les tags sélectionnés
-let selectedTags = [];
+export let selectedTags = [];
 
 // Fonction pour gérer l'ajout des tags lorsqu'un li est cliqué
 const tagsLabel = () => {
@@ -17,6 +17,7 @@ const tagsLabel = () => {
                 updateTagsDisplay();
             }
         }
+        
     });
 };
 
@@ -52,9 +53,20 @@ const updateFilterList = () => {
     ulLists.forEach(ul => {
         Array.from(ul.children).forEach(li => {
             const isSelected = selectedTags.some(tag => tag.name === li.textContent);
-            li.style.display = isSelected ? "none" : "block"; // Cacher les éléments sélectionnés
+            li.style.display = isSelected ? "none" : "block";
+            dispatchTagsEvent(isSelected ? "none" : "block");
         });
     });
+};
+
+//Fonction pour dispatch tagsAdded ou tagsDeleted
+const dispatchTagsEvent = (display) => {
+    if (display === "block") {
+        document.dispatchEvent(new Event("tagsAdded"));
+    }
+    else {
+        document.dispatchEvent(new Event("tagsDeleted"));
+    }
 };
 
 // Attendre que l'événement soit déclenché

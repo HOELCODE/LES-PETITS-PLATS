@@ -1,6 +1,7 @@
 import RecipeModel from "../models/RecipeModel.js";
 import RecipeView from "../views/RecipeView.js";
 import { searchRecipes } from "../utils/mainSearch.js";
+import { updateRecipes } from "../utils/filtersTags.js";   
 
 class RecipeController {
     constructor() {
@@ -19,11 +20,27 @@ class RecipeController {
             this.handleSearch(event.target.value);
         });
 
+        // Ecouter le dispatch de l'événement tagsUpdated
+        document.addEventListener("tagsAdded", () => {
+            this.handleTagsUpdate();
+        });
+
+        // Ecouter le dispatch de l'événement tagsDeleted
+        document.addEventListener("tagsDeleted", () => {
+            this.handleTagsUpdate();
+        });
+
         document.addEventListener("inputCleared", () => {
             const recipes = this.model.getAllRecipes();
             this.view.displayRecipes(recipes);
             this.filteredRecipes = recipes; // Remet les recettes complètes
         });
+    }
+
+    handleTagsUpdate() {
+        const allRecipes = this.model.getAllRecipes();
+        this.filteredRecipes = updateRecipes(allRecipes); // Mise à jour
+        this.updateView(this.filteredRecipes);
     }
 
     handleSearch(query) {
