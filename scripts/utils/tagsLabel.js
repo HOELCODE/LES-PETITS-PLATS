@@ -36,6 +36,7 @@ const updateTagsDisplay = () => {
         divTag.querySelector("i").addEventListener("click", () => removeTag(tag.name));
         tagsContainer.appendChild(divTag);
     });
+    document.dispatchEvent(new Event("tagsDeleted"));
 
     updateFilterList();
 };
@@ -54,19 +55,9 @@ const updateFilterList = () => {
         Array.from(ul.children).forEach(li => {
             const isSelected = selectedTags.some(tag => tag.name === li.textContent);
             li.style.display = isSelected ? "none" : "block";
-            dispatchTagsEvent(isSelected ? "none" : "block");
         });
     });
-};
-
-//Fonction pour dispatch tagsAdded ou tagsDeleted
-const dispatchTagsEvent = (display) => {
-    if (display === "block") {
-        document.dispatchEvent(new Event("tagsAdded"));
-    }
-    else {
-        document.dispatchEvent(new Event("tagsDeleted"));
-    }
+    document.dispatchEvent(new Event("tagsAdded"));
 };
 
 // Attendre que l'événement soit déclenché

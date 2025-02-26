@@ -18,11 +18,13 @@ class RecipeController {
         // Écouter la barre de recherche
         this.searchInput.addEventListener("input", (event) => {
             this.handleSearch(event.target.value);
+            console.log(this.filteredRecipes);
         });
 
         // Ecouter le dispatch de l'événement tagsUpdated
         document.addEventListener("tagsAdded", () => {
             this.handleTagsUpdate();
+            console.log(this.filteredRecipes);
         });
 
         // Ecouter le dispatch de l'événement tagsDeleted

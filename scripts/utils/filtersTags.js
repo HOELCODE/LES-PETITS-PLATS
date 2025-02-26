@@ -1,18 +1,26 @@
 import { selectedTags } from './tagsLabel.js';
 
 // Fonction pour supprimer ou ajouter une recette qui correspond à un tag sélectionné
-export const updateRecipes = (filteredRecipe) => {
-    
-    return filteredRecipe.filter(recipe => {
-        return selectedTags.some(tag =>  
-            recipe.ingredients.some(obj => obj.ingredient.trim().toLowerCase() === tag.name.trim().toLowerCase()) ||
-            recipe.ustensils.some(ust => ust.trim().toLowerCase() === tag.name.trim().toLowerCase()) ||
-            recipe.appliance.trim().toLowerCase() === tag.name.trim().toLowerCase()
-        );
-        console.log(selectedTags);
-        console.log(filteredRecipe);
-    });
-    
+export let recipeDeleted = []; 
+
+export const updateRecipes = (recipes) => {
+    if (selectedTags.length === 0) {
+        recipeDeleted = []; 
+        return recipes; 
+    }
+
+    const normalize = (str) => str.trim().toLowerCase();
+
+    const filteredRecipes = recipes.filter(recipe => 
+        selectedTags.every(tag => {
+            const tagName = normalize(tag.name);
+            return recipe.ingredients.some(obj => normalize(obj.ingredient) === tagName) ||
+                   recipe.ustensils.some(ustensil => normalize(ustensil) === tagName) ||
+                   normalize(recipe.appliance) === tagName;
+        })
+    );
+
+    recipeDeleted = recipes.filter(recipe => !filteredRecipes.includes(recipe));
+
+    return filteredRecipes;
 };
-
-
