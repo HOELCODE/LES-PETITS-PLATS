@@ -1,3 +1,5 @@
+import { normalize } from "./normalize.js";
+
 const onSearch = (inputType) => {
     const input = document.querySelector(`.input-${inputType}`);
     const listItems = document.querySelectorAll(`.${inputType}-li`);
@@ -5,10 +7,10 @@ const onSearch = (inputType) => {
     if (!input) return; // Vérification de l'existence de l'input
 
     input.addEventListener("input", () => {
-        const filter = input.value.toUpperCase(); // Récupérer la valeur au moment de l'input
+        const filter = normalize(input.value); // Récupérer la valeur au moment de l'input
 
         listItems.forEach((el) => {
-            const texte = el.textContent.toUpperCase();
+            const texte = normalize(el.textContent);
             el.style.display = texte.includes(filter) ? "" : "none";
         });
     });

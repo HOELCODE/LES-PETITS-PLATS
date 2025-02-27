@@ -1,12 +1,14 @@
+import { normalize } from "./normalize.js";
+
 export const searchRecipes = (recipes, query) => {
     if (query.length < 3) {
         return recipes;
     }
 
-    query = query.toLowerCase();
+    query = normalize(query);
     return recipes.filter(recipe => 
-        recipe.name.toLowerCase().includes(query) || 
-        recipe.description.toLowerCase().includes(query) ||
-        recipe.ingredients.some(obj => obj.ingredient.toLowerCase().includes(query))
+        normalize(recipe.name).includes(query) || 
+        normalize(recipe.description).includes(query) ||
+        recipe.ingredients.some(obj => normalize(obj.ingredient).includes(query))
     )
 }

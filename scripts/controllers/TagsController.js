@@ -26,6 +26,8 @@ class TagsController {
     async updateTagsView() {
         let filteredRecipes = this.recipeController.getFilteredRecipes(); // Récupère les recettes filtrées
 
+        console.log("test",filteredRecipes);
+
         if (filteredRecipes.length === 0) {
             await this.model.loadAllTags(); // Charge tous les tags
         } else {

@@ -1,4 +1,5 @@
 import { selectedTags } from './tagsLabel.js';
+import { normalize } from './normalize.js';
 
 // Fonction pour supprimer ou ajouter une recette qui correspond à un tag sélectionné
 export let recipeDeleted = []; 
@@ -8,8 +9,6 @@ export const updateRecipes = (recipes) => {
         recipeDeleted = []; 
         return recipes; 
     }
-
-    const normalize = (str) => str.trim().toLowerCase();
 
     const filteredRecipes = recipes.filter(recipe => 
         selectedTags.every(tag => {
