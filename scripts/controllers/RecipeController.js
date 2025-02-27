@@ -15,7 +15,7 @@ class RecipeController {
         await this.model.loadRecipes(); // Charge les données
         this.updateView(this.model.getAllRecipes());
 
-        // Écouter la barre de recherche
+        // Écouter la barre de recherche principale
         this.searchInput.addEventListener("input", (event) => {
             this.handleSearch(event.target.value);
         });

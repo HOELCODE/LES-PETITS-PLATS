@@ -14,22 +14,33 @@ const showCross = () => {
     });
 }
 
-// Fonction pour effacer le contenu du input
+// Fonction pour effacer le contenu du input main
 const clearInput = () => {
-    const input = document.querySelectorAll('input');
-    const cross = document.querySelectorAll('.fa-xmark');
+    const input = document.querySelector('.input-search');
+    const cross = document.querySelector('.main-cross');
+
+    cross.addEventListener('click', () => {
+        input.value = '';
+        cross.classList.add('hidden');
+        document.dispatchEvent(new Event("inputCleared"));
+    });
+}
+
+// Fonction pour effacer le contenu du input des tags
+const clearTagInput = () => {
+    const input = document.querySelectorAll('.input-filter');
+    const cross = document.querySelectorAll('.filters-cross');
 
     cross.forEach((element, index) => {
         element.addEventListener('click', () => {
             input[index].value = '';
             element.classList.add('hidden');
-            document.dispatchEvent(new Event("inputCleared"));
+            document.dispatchEvent(new Event("inputTagCleared"));
         });
     });
-
-    
 }
 
 // Déclaration des fonctions
 clearInput();
 showCross();
+clearTagInput();

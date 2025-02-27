@@ -13,20 +13,24 @@ class TagsController {
         await this.recipeController.init(); // Assure que les recettes sont chargées avant
         await this.updateTagsView(); // Met à jour les tags dès le début
 
-        // Écoute la barre de recherche
+        // Écoute la barre de recherche principale
         document.querySelector(".input-search").addEventListener("input", () => {
             this.updateTagsView();
         });
 
+        // Ecoute les dispatch du main Search
         document.addEventListener("inputCleared", () => {
+            this.updateTagsView();
+        });
+
+        // Ecoute les dispatch des search tags
+        document.addEventListener("inputTagCleared", () => {
             this.updateTagsView();
         });
     }
 
     async updateTagsView() {
         let filteredRecipes = this.recipeController.getFilteredRecipes(); // Récupère les recettes filtrées
-
-        console.log("test",filteredRecipes);
 
         if (filteredRecipes.length === 0) {
             await this.model.loadAllTags(); // Charge tous les tags
@@ -39,6 +43,7 @@ class TagsController {
         this.view.displayUtensils(this.model.getUtensils());
         this.view.displayDevices(this.model.getDevices());
     }
+
 }
 
 export default TagsController;
