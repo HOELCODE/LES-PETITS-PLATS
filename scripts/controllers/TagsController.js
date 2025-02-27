@@ -27,6 +27,17 @@ class TagsController {
         document.addEventListener("inputTagCleared", () => {
             this.updateTagsView();
         });
+
+        //Eccoute le dispatch tagsAdded
+        document.addEventListener("tagsAdded", () => {
+            this.updateTagsView();
+        });
+
+        //Ecoute le dispatch tagsDeleted
+        document.addEventListener("tagsDeleted", () => {
+            this.updateTagsView();
+        });
+
     }
 
     async updateTagsView() {

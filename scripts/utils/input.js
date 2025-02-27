@@ -40,7 +40,18 @@ const clearTagInput = () => {
     });
 }
 
+// Fonction pour vider le contenu de tous les input au chargement 
+const clearAllInputs = () => { 
+    const input = document.querySelectorAll('input');
+    document.addEventListener('DOMContentLoaded', () => {
+        input.forEach(element => {
+            element.value = '';
+        });
+    });
+}
+
 // Déclaration des fonctions
 clearInput();
 showCross();
 clearTagInput();
+clearAllInputs();
