@@ -1,8 +1,7 @@
-import RecipeController from "./controllers/RecipeController.js";
-import TagsController from "./controllers/TagsController.js";
+import DataController from "./controllers/DataController.js";
 
 // Initialise l'application
-const Recipe = new RecipeController();
-const Tags = new TagsController();
-Recipe.init();
-Tags.init();
+const Data = new DataController();
+
+// Lacnce l'application
+Data.init();
