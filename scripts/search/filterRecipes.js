@@ -12,7 +12,7 @@ export const filterRecipes = (recipes, queries) => {
             (Array.isArray(recipe.ustensils) && recipe.ustensils.some(ustensil => typeof ustensil === 'string' && normalize(ustensil).includes(query))) || // Chercher dans les ustensiles
             (Array.isArray(recipe.ingredients) && recipe.ingredients.some(ingredientObj => 
                 typeof ingredientObj.ingredient === 'string' && normalize(ingredientObj.ingredient).includes(query)
-            )) // Chercher dans les ingrédients
+            )) // Chercher dans les
         )
     );
 };
