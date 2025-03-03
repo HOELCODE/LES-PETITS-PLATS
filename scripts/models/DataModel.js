@@ -43,17 +43,17 @@ class DataModel {
                         )
                     )
                 ];
-        
+
                 // Crée un tableau d'ustensiles
                 this.utensils = [
                     ...new Set(
-                        recipes.map(recipe => 
-                            Array.isArray(recipe.ustensils)
-                                ? recipe.ustensils.map(utensil => 
-                                    typeof utensil === 'string' ? normalize(utensil) : utensil
-                                )
+                        recipes.flatMap(recipe => 
+                            Array.isArray(recipe.ustensils) 
+                                ? recipe.ustensils
+                                    .filter(utensil => typeof utensil === 'string') // Vérifie que c'est bien une chaîne
+                                    .map(utensil => normalize(utensil)) // Normalise les noms
                                 : []
-                        ).flat()
+                        )
                     )
                 ];
     }

@@ -1,5 +1,6 @@
 // Tableau pour stocker les tags sélectionnés
 export let selectedTags = [];
+export let deletedTags = [];
 
 // Fonction pour gérer l'ajout d'un tag lorsqu'un lu est cliqué
 const addTag = () => {
@@ -14,9 +15,12 @@ const addTag = () => {
             // Vérifier si le tag est déjà sélectionné
             if (!selectedTags.some(t => t.name === tag)) {
                 selectedTags.push({ name: tag, class: tagClass });
+                deletedTags = deletedTags.filter(t => t.name !== tag);
                 updateTagsDisplay();
                 // Dispatch event
                 document.dispatchEvent(new Event("tagsAdded"));
+                // Mettre à jour la liste des filtres
+                updateFilterList(tag);
             }
         }
         
@@ -37,10 +41,13 @@ const deleteTag = () => {
             
             // Supprimer le tag du tableau SelectedTags
             selectedTags = selectedTags.filter(t => t.name !== tag);
+            deletedTags.push({ name: tag });
             // Ajouter le tag à la liste deletedTags
             DeleteTagDisplay(divElement);
             // Dispatch event
             document.dispatchEvent(new Event("tagsDeleted"));
+            // Mettre à jour la liste des filtres
+            updateFilterList(tag);
         }
     });
 }
@@ -65,6 +72,18 @@ const updateTagsDisplay = () => {
 const DeleteTagDisplay = (element) => {
     element.remove();
 }
+
+// Fonction pour mettre à jour la liste des filtres
+const updateFilterList = (tag) => {
+    const ulLists = document.querySelectorAll(".dropdown-list");
+
+    ulLists.forEach(ul => {
+        Array.from(ul.children).forEach(li => {
+            const isSelected = selectedTags.some(tag => tag.name === li.textContent);
+            li.style.display = isSelected ? "none" : "block";
+        });
+    });
+};
 
 // Déclaration des fonctions
 document.addEventListener('recipeLoaded', addTag());
