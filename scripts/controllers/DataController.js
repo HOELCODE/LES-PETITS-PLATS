@@ -1,10 +1,8 @@
 import DataModel from "../models/DataModel.js";
 import DataView from "../views/DataView.js";
-import { searchRecipes } from "../utils/mainSearch.js";
+import { searchRecipes } from "../search/mainSearch.js";
 import { selectedTags } from "../search/addTag.js";
-import { deletedTags } from "../search/addTag.js";
 import { filterRecipes } from "../search/filterRecipes.js";
-import { searchDeletedTagsInData } from "../utils/searchTagInData.js";
 
 class DataController {
     constructor() {
@@ -14,6 +12,8 @@ class DataController {
         this.filteredRecipes = [];
         this.lastFilteredRecipes = [];
         this.filteredRecipesDeleteTags = [];
+        this.testTableau = [];
+        this.testTableau2 = [];
     }
 
     async init() {
@@ -22,6 +22,9 @@ class DataController {
         // Recettes
         this.loadRecipeView(this.model.getAllRecipes());
 
+        // Composants
+        this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
+
         // Mettre à jour les recettes lorsqu'une recherche est fait sur le main search
         document.querySelector(".input-search").addEventListener("input", (event) => {
             this.handleMainInputSearch(event.target.value);
@@ -29,28 +32,36 @@ class DataController {
 
         // Mettre à jour les recettes et les filtres lorsqu'un tag est ajouté
         document.addEventListener("tagsAdded", () => {
-            if (selectedTags.length === 1  && this.filteredRecipes.length > 0) {
-                console.log("1 avant", this.filteredRecipes);
-                this.handleTagFilter(this.filteredRecipes, selectedTags.map(tag => tag.name));
-                console.log("1 après", this.filteredRecipes);
-            }  else if (selectedTags.length > 1 && this.filteredRecipes.length > 0) {
-                console.log("2 avant", this.lastFilteredRecipes);
-                this.handleTagFilter(this.lastFilteredRecipes, selectedTags.map(tag => tag.name));
-                console.log("2 après", this.lastFilteredRecipes);
-            } else if (this.filteredRecipes.length === 0) {
-                console.log("3 avant", this.filteredRecipes);
+            if (this.filteredRecipes.length === 0) {
                 this.handleTagFilter(this.model.getAllRecipes(), selectedTags.map(tag => tag.name));
-                console.log("3 après", this.filteredRecipes);
+            } else {
+                this.handleTagFilter(this.filteredRecipes, selectedTags.map(tag => tag.name));
             }
+            
         });
 
         // Mettre à jour les recettes et les filtres lorsqu'un tag est supprimé
         document.addEventListener("tagsDeleted", () => {
-            this.handleDeletedTag();
+            if (selectedTags.length < 1) {
+                if (document.querySelector(".input-search").value === "") {
+                    this.loadRecipeView(this.model.getAllRecipes());
+                    this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
+                } else {
+                    this.loadRecipeView(this.testTableau2);
+                    this.loadComponentsView(this.model.getAllComponents(this.testTableau2));
+                
+                }
+            }  else {
+                this.handleDeletedTag();
+            }
         });
 
-        // Composants
-        this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
+        // Mettre à jour les recettes lorsque main input est effacé
+        document.addEventListener("inputCleared", () => {
+            this.loadRecipeView(this.model.getAllRecipes());
+            this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
+        });
+
     }
 
     // Recettes
@@ -64,6 +75,7 @@ class DataController {
         this.filteredRecipes = searchRecipes(allRecipes, query);
         this.loadRecipeView(this.filteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
+        this.testTableau2 = this.filteredRecipes;
     }
 
     // Composants
@@ -75,19 +87,15 @@ class DataController {
     }
 
     handleDeletedTag() {
-        this.filteredRecipesDeleteTags = searchDeletedTagsInData(this.model.getAllRecipes(), deletedTags);
-        this.lastFilteredRecipes.push(...this.filteredRecipesDeleteTags);
         this.loadRecipeView(this.lastFilteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.lastFilteredRecipes));
     }
 
     handleTagFilter(liste, queries) {
         this.lastFilteredRecipes = liste;
-        console.log("handleTagfilter avant", liste);
-        liste = filterRecipes(liste, queries);
-        console.log("handleTagFIlter après", liste);
-        this.loadRecipeView(liste);
-        this.loadComponentsView(this.model.getAllComponents(liste));
+        this.filteredRecipes = filterRecipes(liste, queries);
+        this.loadRecipeView(this.filteredRecipes);
+        this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
     }
 }
 

@@ -51,7 +51,10 @@ const clearAllInputs = () => {
 }
 
 // Déclaration des fonctions
-clearInput();
-showCross();
-clearTagInput();
+document.addEventListener('recipeLoaded', () => {
+    showCross();
+    clearInput();
+    clearTagInput();
+});
+
 clearAllInputs();
