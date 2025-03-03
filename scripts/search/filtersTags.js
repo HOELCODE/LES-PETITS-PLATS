@@ -1,5 +1,5 @@
 import { selectedTags } from './tagsLabel.js';
-import { normalize } from './normalize.js';
+import { normalize } from '../utils/normalize.js';
 
 // Fonction pour supprimer ou ajouter une recette qui correspond à un tag sélectionné
 export let recipeDeleted = []; 

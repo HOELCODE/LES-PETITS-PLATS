@@ -1,4 +1,4 @@
-import { normalize } from "./normalize.js";
+import { normalize } from "../utils/normalize.js";
 
 const onSearch = (inputType) => {
     const input = document.querySelector(`.input-${inputType}`);
@@ -11,7 +11,7 @@ const onSearch = (inputType) => {
 
         listItems.forEach((el) => {
             const texte = normalize(el.textContent);
-            el.style.display = texte.includes(filter) ? "" : "none";
+            el.style.display = texte.includes(filter) ? "block" : "none";
         });
     });
 };    

@@ -1,4 +1,4 @@
-import { normalize } from "./normalize.js";
+import { normalize } from "../utils/normalize.js";
 
 export const searchRecipes = (recipes, query) => {
     if (query.length < 3) {
