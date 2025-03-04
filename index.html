@@ -87,6 +87,20 @@
             <p class="suggestion-p">Aucune recette ne contient <strong><i><span class="suggestion-span"></span></i></strong> Vous pouvez chercher <strong><i>"Sucre"</i></strong> ou <strong><i>"poulet"</i></strong> par exemple</p>
         </div>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const basePath = "/LES-PETITS-PLATS/"; // Ton dossier sur GitHub Pages
+        
+            document.querySelectorAll("script[src], link[href], img[src]").forEach(el => {
+                const attr = el.hasAttribute("src") ? "src" : "href";
+                const url = el.getAttribute(attr);
+        
+                if (url && !url.startsWith("http") && !url.startsWith(basePath)) {
+                    el.setAttribute(attr, basePath + url.replace(/^\/+/, ""));
+                }
+            });
+        });
+        </script>        
     <script src="/scripts/App.js" type="module"></script>
     <script src="/scripts/utils/dropdown.js"></script>
     <script src="/scripts/utils/input.js"></script>
