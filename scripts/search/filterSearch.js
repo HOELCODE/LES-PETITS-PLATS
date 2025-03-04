@@ -2,7 +2,7 @@ import { normalize } from "../utils/normalize.js";
 
 const onSearch = (inputType) => {
     const input = document.querySelector(`.input-${inputType}`);
-    const listItems = document.querySelectorAll(`.${inputType}-li`);
+    const listItems = document.querySelectorAll(`.dropdown-list .${inputType}-li`);
 
     if (!input) return; // Vérification de l'existence de l'input
 
@@ -14,7 +14,14 @@ const onSearch = (inputType) => {
             el.style.display = texte.includes(filter) ? "block" : "none";
         });
     });
-};    
+
+    // Réaffichage des éléments cachés lorsque l'événement "inputTagCleared" est déclenché
+    document.addEventListener("inputTagCleared", () => {
+        listItems.forEach((el) => {
+            el.style.display = "block";
+        });
+    });
+};
 
 // Attendre le chargement des tags avant d'initialiser la recherche
 document.addEventListener("tagsLoaded", () => {

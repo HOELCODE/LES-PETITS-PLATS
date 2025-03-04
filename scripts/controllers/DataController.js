@@ -11,9 +11,7 @@ class DataController {
         // Nouveaux tableaux
         this.filteredRecipes = [];
         this.lastFilteredRecipes = [];
-        this.filteredRecipesDeleteTags = [];
-        this.testTableau = [];
-        this.testTableau2 = [];
+        this.initialRecipe = [];
     }
 
     async init() {
@@ -37,7 +35,7 @@ class DataController {
             } else {
                 this.handleTagFilter(this.filteredRecipes, selectedTags.map(tag => tag.name));
             }
-            
+
         });
 
         // Mettre à jour les recettes et les filtres lorsqu'un tag est supprimé
@@ -47,11 +45,11 @@ class DataController {
                     this.loadRecipeView(this.model.getAllRecipes());
                     this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
                 } else {
-                    this.loadRecipeView(this.testTableau2);
-                    this.loadComponentsView(this.model.getAllComponents(this.testTableau2));
-                
+                    this.loadRecipeView(this.initialRecipe);
+                    this.loadComponentsView(this.model.getAllComponents(this.initialRecipe));
+
                 }
-            }  else {
+            } else {
                 this.handleDeletedTag();
             }
         });
@@ -60,7 +58,7 @@ class DataController {
         document.addEventListener("inputCleared", () => {
             this.loadRecipeView(this.model.getAllRecipes());
             this.loadComponentsView(this.model.getAllComponents(this.model.getAllRecipes()));
-        });
+        });        
 
     }
 
@@ -75,7 +73,7 @@ class DataController {
         this.filteredRecipes = searchRecipes(allRecipes, query);
         this.loadRecipeView(this.filteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
-        this.testTableau2 = this.filteredRecipes;
+        this.initialRecipe = this.filteredRecipes;
     }
 
     // Composants
@@ -96,6 +94,28 @@ class DataController {
         this.filteredRecipes = filterRecipes(liste, queries);
         this.loadRecipeView(this.filteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
+    }
+
+    getLastTagList = () => {
+        const tagsInput = document.querySelectorAll('.input-filter');
+        const liIngredients = document.querySelectorAll('.ingredient-li');
+        const liAppareils = document.querySelectorAll('.device-li');
+        const liUstensils = document.querySelectorAll('.utensil-li');
+
+        this.tagList = [];
+
+        tagsInput.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (index === 0) {
+                    this.tagList = [... this.tagList, ...liIngredients];
+                } else if (index === 1) {
+                    this.tagList = [... this.tagList, ...liAppareils];
+                } else if (index === 2) {
+                    this.tagList = [... this.tagList, ...liUstensils];
+                }
+                
+            });
+        });
     }
 }
 
