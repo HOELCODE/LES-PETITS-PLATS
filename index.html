@@ -86,28 +86,14 @@
         <div class="suggestion hidden">
             <p class="suggestion-p">Aucune recette ne contient <strong><i><span class="suggestion-span"></span></i></strong> Vous pouvez chercher <strong><i>"Sucre"</i></strong> ou <strong><i>"poulet"</i></strong> par exemple</p>
         </div>
-    </main>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const basePath = "/LES-PETITS-PLATS/"; // Ton dossier sur GitHub Pages
-        
-            document.querySelectorAll("script[src], link[href], img[src]").forEach(el => {
-                const attr = el.hasAttribute("src") ? "src" : "href";
-                const url = el.getAttribute(attr);
-        
-                if (url && !url.startsWith("http") && !url.startsWith(basePath)) {
-                    el.setAttribute(attr, basePath + url.replace(/^\/+/, ""));
-                }
-            });
-        });
-    </script>        
-    <script src="/LES-PETITS-PLATS/scripts/App.js" type="module"></script>
-    <script src="/LES-PETITS-PLATS/scripts/utils/dropdown.js"></script>
-    <script src="/LES-PETITS-PLATS/scripts/utils/input.js"></script>
-    <script src="/LES-PETITS-PLATS/scripts/utils/totalRecipes.js" type="module"></script>
-    <script src="/LES-PETITS-PLATS/scripts/search/addTag.js" type="module"></script>
-    <script src="/LES-PETITS-PLATS/scripts/utils/suggestion.js" type="module"></script>
-    <script src="/LES-PETITS-PLATS/scripts/search/filterSearch.js" type="module"></script>
+    </main>      
+    <script src="/scripts/App.js" type="module"></script>
+    <script src="/scripts/utils/dropdown.js"></script>
+    <script src="/scripts/utils/input.js"></script>
+    <script src="/scripts/utils/totalRecipes.js" type="module"></script>
+    <script src="/scripts/search/addTag.js" type="module"></script>
+    <script src="/scripts/utils/suggestion.js" type="module"></script>
+    <script src="/scripts/search/filterSearch.js" type="module"></script>
 </body>
 
 </html>
