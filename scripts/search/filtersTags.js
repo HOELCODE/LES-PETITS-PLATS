@@ -1,3 +1,4 @@
+// inutile
 import { selectedTags } from './tagsLabel.js';
 import { normalize } from '../utils/normalize.js';
 
@@ -23,3 +24,4 @@ export const updateRecipes = (recipes) => {
 
     return filteredRecipes;
 };
+//
