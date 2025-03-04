@@ -9,17 +9,19 @@ const onSearch = (inputType) => {
     input.addEventListener("input", () => {
         const filter = normalize(input.value); // Récupérer la valeur au moment de l'input
 
-        listItems.forEach((el) => {
-            const texte = normalize(el.textContent);
-            el.style.display = texte.includes(filter) ? "block" : "none";
-        });
+        for (let i = 0; i < listItems.length; i++) {
+            const texte = normalize(listItems[i].textContent);
+            listItems[i].style.display = texte.includes(filter) ? "block" : "none";
+        }
     });
 
     // Réaffichage des éléments cachés lorsque l'événement "inputTagCleared" est déclenché
     document.addEventListener("inputTagCleared", () => {
-        listItems.forEach((el) => {
-            el.style.display = "block";
-        });
+        let i = 0;
+        while (i < listItems.length) {
+            listItems[i].style.display = "block";
+            i++;
+        }
     });
 };
 

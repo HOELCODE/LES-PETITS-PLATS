@@ -95,28 +95,6 @@ class DataController {
         this.loadRecipeView(this.filteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
     }
-
-    getLastTagList = () => {
-        const tagsInput = document.querySelectorAll('.input-filter');
-        const liIngredients = document.querySelectorAll('.ingredient-li');
-        const liAppareils = document.querySelectorAll('.device-li');
-        const liUstensils = document.querySelectorAll('.utensil-li');
-
-        this.tagList = [];
-
-        tagsInput.forEach((input, index) => {
-            input.addEventListener('input', () => {
-                if (index === 0) {
-                    this.tagList = [... this.tagList, ...liIngredients];
-                } else if (index === 1) {
-                    this.tagList = [... this.tagList, ...liAppareils];
-                } else if (index === 2) {
-                    this.tagList = [... this.tagList, ...liUstensils];
-                }
-                
-            });
-        });
-    }
 }
 
 export default DataController;

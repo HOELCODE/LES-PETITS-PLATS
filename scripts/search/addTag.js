@@ -2,7 +2,7 @@
 export let selectedTags = [];
 export let deletedTags = [];
 
-// Fonction pour gérer l'ajout d'un tag lorsqu'un lu est cliqué
+// Fonction pour gérer l'ajout d'un tag lorsqu'un <li> est cliqué
 const addTag = () => {
     const container = document.querySelector('.filter-total-cantainer');
 
@@ -12,18 +12,30 @@ const addTag = () => {
             const tag = element.textContent;
             const tagClass = element.className;
 
-            // Vérifier si le tag est déjà sélectionné
-            if (!selectedTags.some(t => t.name === tag)) {
+            let isAlreadySelected = false;
+            for (let i = 0; i < selectedTags.length; i++) {
+                if (selectedTags[i].name === tag) {
+                    isAlreadySelected = true;
+                    break;
+                }
+            }
+
+            if (!isAlreadySelected) {
                 selectedTags.push({ name: tag, class: tagClass });
-                deletedTags = deletedTags.filter(t => t.name !== tag);
+
+                let newDeletedTags = [];
+                for (let i = 0; i < deletedTags.length; i++) {
+                    if (deletedTags[i].name !== tag) {
+                        newDeletedTags.push(deletedTags[i]);
+                    }
+                }
+                deletedTags = newDeletedTags;
+
                 updateTagsDisplay();
-                // Dispatch event
                 document.dispatchEvent(new Event("tagsAdded"));
-                // Mettre à jour la liste des filtres
                 updateFilterList(tag);
             }
         }
-        
     });
 }
 
@@ -38,15 +50,19 @@ const deleteTag = () => {
             const spanElement = element.previousElementSibling;
             const tag = spanElement.textContent;
             const tagClass = spanElement.className;
-            
-            // Supprimer le tag du tableau SelectedTags
-            selectedTags = selectedTags.filter(t => t.name !== tag);
-            deletedTags.push({ name: tag });
-            // Ajouter le tag à la liste deletedTags
+
+            let newSelectedTags = [];
+            for (let i = 0; i < selectedTags.length; i++) {
+                if (selectedTags[i].name !== tag) {
+                    newSelectedTags.push(selectedTags[i]);
+                }
+            }
+            selectedTags = newSelectedTags;
+
+            deletedTags.push({ name: tag, class: tagClass });
+
             DeleteTagDisplay(divElement);
-            // Dispatch event
             document.dispatchEvent(new Event("tagsDeleted"));
-            // Mettre à jour la liste des filtres
             updateFilterList(tag);
         }
     });
@@ -57,7 +73,9 @@ const updateTagsDisplay = () => {
     const tagsContainer = document.querySelector('.tags-container');
     tagsContainer.innerHTML = ""; // Vider l'affichage actuel
 
-    selectedTags.forEach(tag => {
+    for (let i = 0; i < selectedTags.length; i++) {
+        const tag = selectedTags[i];
+
         const divTag = document.createElement('div');
         divTag.classList.add('tag-container');
         divTag.innerHTML = `
@@ -65,7 +83,7 @@ const updateTagsDisplay = () => {
             <i class="fa-solid fa-xmark"></i>
         `;
         tagsContainer.appendChild(divTag);
-    });
+    }
 }
 
 // Fonction pour supprimer l'affichage du Tag
@@ -77,12 +95,26 @@ const DeleteTagDisplay = (element) => {
 const updateFilterList = (tag) => {
     const ulLists = document.querySelectorAll(".dropdown-list");
 
-    ulLists.forEach(ul => {
-        Array.from(ul.children).forEach(li => {
-            const isSelected = selectedTags.some(tag => tag.name === li.textContent);
+    for (let i = 0; i < ulLists.length; i++) {
+        const ul = ulLists[i];
+        const liElements = ul.children;
+
+        for (let j = 0; j < liElements.length; j++) {
+            const li = liElements[j];
+
+            let isSelected = false;
+            let k = 0;
+            while (k < selectedTags.length) {
+                if (selectedTags[k].name === li.textContent) {
+                    isSelected = true;
+                    break;
+                }
+                k++;
+            }
+
             li.style.display = isSelected ? "none" : "block";
-        });
-    });
+        }
+    }
 };
 
 // Déclaration des fonctions
