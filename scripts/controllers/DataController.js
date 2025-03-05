@@ -72,7 +72,8 @@ class DataController {
 
     handleMainInputSearch(query) {
         const allRecipes = this.model.getAllRecipes();
-        this.filteredRecipes = searchRecipes(allRecipes, query);
+        const mainInput = document.querySelector(".input-search");
+        this.filteredRecipes = searchRecipes(allRecipes, query, mainInput);
         this.loadRecipeView(this.filteredRecipes);
         this.loadComponentsView(this.model.getAllComponents(this.filteredRecipes));
         this.initialRecipe = this.filteredRecipes;

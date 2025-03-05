@@ -1,7 +1,15 @@
 import { normalize } from "../utils/normalize.js";
 
-export const searchRecipes = (recipes, query) => {
+export const searchRecipes = (recipes, query, inputElement) => {
     if (query.length < 3) {
+        return recipes;
+    }
+
+    // Détection d'une tentative d'injection (balises HTML, script, SQL, etc.)
+    const injectionPattern = /[<>"/'`;(){}]/g;
+    if (injectionPattern.test(query)) {
+        alert("Caractères interdits détectés ! Veuillez entrer une recherche valide.");
+        inputElement.value = ""; // On vide l'input
         return recipes;
     }
 
@@ -31,3 +39,4 @@ export const searchRecipes = (recipes, query) => {
     recipes = result
     return recipes;
 };
+
