@@ -3,6 +3,7 @@ import DataView from "../views/DataView.js";
 import { searchRecipes } from "../search/mainSearch.js";
 import { selectedTags } from "../search/addTag.js";
 import { filterRecipes } from "../search/filterRecipes.js";
+import { hideMainSearchInTagList } from "../utils/hideMainSearchInTagList.js";
 
 class DataController {
     constructor() {
@@ -26,6 +27,7 @@ class DataController {
         // Mettre à jour les recettes lorsqu'une recherche est fait sur le main search
         document.querySelector(".input-search").addEventListener("input", (event) => {
             this.handleMainInputSearch(event.target.value);
+            hideMainSearchInTagList(event.target.value, document.querySelectorAll(".dropdown-list li"));
         });
 
         // Mettre à jour les recettes et les filtres lorsqu'un tag est ajouté
