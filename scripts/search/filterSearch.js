@@ -7,7 +7,17 @@ const onSearch = (inputType) => {
     if (!input) return; // Vérification de l'existence de l'input
 
     input.addEventListener("input", () => {
-        const filter = normalize(input.value); // Récupérer la valeur au moment de l'input
+        let filter = input.value;
+
+        // Détection d'une tentative d'injection (balises HTML, script, SQL, etc.)
+        const injectionPattern = /[<>"/'`;(){}]/g;
+        if (injectionPattern.test(filter)) {
+            alert("Caractères interdits détectés ! Veuillez entrer une recherche valide.");
+            input.value = ""; // On vide l'input
+            return;
+        }
+
+        filter = normalize(filter); // Normalisation après validation
 
         listItems.forEach((el) => {
             const texte = normalize(el.textContent);
